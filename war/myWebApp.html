@@ -208,5 +208,24 @@
 		<img id="rk_font1" src="rk_font1.bmp" width="8" height="2048" />
 	</div>
 
+	<textarea id="sample_circles" style="display: none;">
+cls();
+
+attempts = 30;
+
+for (j = 1; j <= attempts; j++) {
+    setTimeout(createFunction(j), j * 300);
+}
+
+function createFunction(r) {
+
+    return async function() {
+          x0 = Math.random() * 150 + 5;
+          y0 = Math.random() * 50 + 5;
+          circle(x0, y0, r);
+    }
+}
+	</textarea>
+
 </body>
 </html>

@@ -9,12 +9,7 @@ import com.example.client.radio86java.UserInterfaceImpl;
 import com.example.client.radio86java.UserInterfaceIntf;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JsDate;
-import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -22,16 +17,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.dom.client.LoadEvent;
-import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabPanel;
@@ -77,12 +67,14 @@ public class myWebApp implements EntryPoint {
 	    ta.setCharacterWidth(80);
 	    ta.setVisibleLines(50);
 	    vp2.add(ta);
-	    ta.setText("cls();\n" + 
-	    		"\n" + 
-	    		"plot(19, 19 ,1); \n" + 
-	    		"plot(21, 19, 1); \n" + 
-	    		"plot(23, 19, 1);\n" + 
-	    		"");
+		ta.setText("cls();" + "\n" 
+				+ "plot(0, 0, 1);" + "\n" 
+				+ "line(49, 49);" + "\n" 
+				+ "line(49, 0);" + "\n"
+				+ "line(0, 0);" + "\n"
+				+ "\n"
+				+ "circle(24, 24, 20);"
+				+ "\n");
 
 		//RootPanel.get().add(new Label("HTML5 Canvas element"));
 		Canvas canvas = Canvas.createIfSupported();
@@ -106,7 +98,7 @@ public class myWebApp implements EntryPoint {
 		ImageElement imageElement = ImageElement.as(DOM.getElementById("rk_font1"));
 		ComputerModelIntf computerModel = new ComputerModel(parameters);
 		UserInterfaceIntf ui = new UserInterfaceImpl(context, imageElement, computerModel);
-		Radio86rkAPI api = Radio86rkAPI.createInstance(computerModel, ui);
+		Radio86rkAPI.createInstance(computerModel, ui);
 
 		final ClickHandler bHandler = new ClickHandler() {
 			@Override

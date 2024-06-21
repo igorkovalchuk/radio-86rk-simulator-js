@@ -1,9 +1,5 @@
 package com.example.client.radio86java;
 
-import java.util.LinkedList;
-
-import com.google.gwt.core.client.GWT;
-
 /**
  * TerminalModel (former Console.java)
  */
@@ -93,6 +89,13 @@ public class TerminalModel implements TerminalModelIntf {
 
   @Override
   public final void cls() {
+    // reset cursor
+    point(0, parameters.terminalHeight - 1);
+
+    // reset plot/line initial point
+    pointX = 0;
+    pointY = 0;
+
     for (int y = 0; y < maxY; y++) {
       for (int x = 0; x < maxX; x++) {
         modifyYX(y, x, ' ');
@@ -248,6 +251,7 @@ public class TerminalModel implements TerminalModelIntf {
     cursorX++;
   }
 
+  /*
   private void moveLeft(boolean fixed) {
     cursorX--;
     if (cursorX < 0) {
@@ -257,7 +261,9 @@ public class TerminalModel implements TerminalModelIntf {
       }
     }
   }
+  */
 
+  /*
   private void moveUp() {
     if (directionUp > 0) {
       // coordinates of (0, 0) at the bottom left corner of the screen;
@@ -273,6 +279,7 @@ public class TerminalModel implements TerminalModelIntf {
       }
     }
   }
+  */
 
   public void lf() {
     lf(false);
