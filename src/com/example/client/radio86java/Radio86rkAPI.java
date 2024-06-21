@@ -5,6 +5,7 @@ import java.util.Arrays;
 //import radio86java.file.SimpleFileInterface;
 
 import com.example.client.myWebApp;
+import com.google.gwt.core.client.GWT;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -183,6 +184,6 @@ public class Radio86rkAPI {
   //}
 
   public void log(Object message) {
-    myWebApp.consoleLog("LOG: " + message);
+    GWT.log("LOG: " + message);
   }
 }

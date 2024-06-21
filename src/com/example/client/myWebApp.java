@@ -92,8 +92,6 @@ public class myWebApp implements EntryPoint {
 
 		context = canvas.getContext2d();
 		vp1.add(canvas);
-
-		/////////////////////////////////////////////
 		
 		ImageElement imageElement = ImageElement.as(DOM.getElementById("rk_font1"));
 		ComputerModelIntf computerModel = new ComputerModel(parameters);
@@ -130,8 +128,6 @@ public class myWebApp implements EntryPoint {
 			}
 		});
 
-		/////////////////////////////////////////////
-
 		class MyHandler implements KeyUpHandler {
 
 			public void onKeyUp(KeyUpEvent event) {
@@ -164,19 +160,15 @@ public class myWebApp implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		canvas.addKeyUpHandler(handler);
 
-		////////////////////////////////////////////
-		
-		final Timer timer = new Timer() {
-			@Override
-			public void run() {
+		//final Timer timer = new Timer() {
+			//@Override
+			//public void run() {
 				// updateClock(JsDate.create());
-			}
-		};
-		timer.scheduleRepeating(REFRESH_RATE);
+			//}
+		//};
+		//timer.scheduleRepeating(REFRESH_RATE);
 
 	}
-
-	
 
 	//private void updateClock(JsDate date) {
 		//context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -186,40 +178,4 @@ public class myWebApp implements EntryPoint {
 	  $wnd.tryToStart(obj);
 	}-*/;
 
-	public static native void consoleLog(Object msg) /*-{
-	  console.log(msg);
-	}-*/;
-
-	public static void createDialog(String message) {
-		// Create the popup dialog box
-		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setText("Keyboard input");
-		dialogBox.setAnimationEnabled(true);
-		final Button closeButton = new Button("Close");
-		// We can set the id of a widget by accessing its Element
-		closeButton.getElement().setId("closeButton");
-
-		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.addStyleName("dialogVPanel");
-
-		dialogVPanel.add(new HTML("<b>" + message + ":</b>"));
-
-		final TextBox inputField = new TextBox();
-		dialogVPanel.add(inputField);
-
-		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		dialogVPanel.add(closeButton);
-		dialogBox.setWidget(dialogVPanel);
-
-		// Add a handler to close the DialogBox
-		closeButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				dialogBox.hide();
-			}
-		});
-
-		dialogBox.setPopupPosition(100, 100);
-		dialogBox.setModal(true);
-		dialogBox.show();
-	}
 }
