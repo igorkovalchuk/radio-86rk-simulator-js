@@ -25,9 +25,9 @@ h1 {
 
 .my-button {
   border: 1px solid white !important;
-  padding: 15px 25px !important;
+  padding: 20px 35px !important;
   margin: 2px !important;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 20px !important;
 }
