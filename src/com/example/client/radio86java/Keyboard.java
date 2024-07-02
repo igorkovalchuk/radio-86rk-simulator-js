@@ -14,12 +14,12 @@ public class Keyboard {
 	public static final String LEFT = "LEFT";
 	public static final String RIGHT = "RIGHT";
 
-	private static String[] k1 = new String[]{"1", "2", "3", "4", "5", "6", "7", "9", "0"};
-	private static String[] k2 = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I"};
-	private static String[] k3 = new String[]{"J", "K", "L", "M", "N", "O", "P", "Q", "R"};
-	private static String[] k4 = new String[]{"S", "T", "U", "V", "W", "X", "Y", "Z", "ENTER"};
-	private static String[] k5 = new String[]{"SPACE", "SPACE", "SPACE", "SPACE"};
-	private static String[] k6 = new String[]{UP, DOWN, LEFT, RIGHT};
+	private static String[] k1 = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+	private static String[] k2 = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+	private static String[] k3 = new String[]{"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"};
+	private static String[] k4 = new String[]{"U", "V", "W", "X", "Y", "Z", "ENTER"};
+	private static String[] k5 = new String[]{UP, DOWN, LEFT, RIGHT};
+	private static String[] k6 = new String[]{"SPACE", "SPACE", "SPACE", "SPACE"};
 
 	public final static Object[] keyboard = new Object[] {k1, k2, k3, k4, k5, k6};
 
