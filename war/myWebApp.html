@@ -82,12 +82,16 @@
 	setInterval(verifyKeyboard, 100);
 
 	async function tryToStart(code) {
-		await eval(
+		try {
+			await eval(
 				"async function programCodeTryToStart() {\n" +
 				code + "\n" +
 				"}\n" +
 				"programCodeTryToStart();\n"
 				);
+		} catch (e) {
+			alert(e);
+		}
 	}
 
 	async function pause(seconds) {
