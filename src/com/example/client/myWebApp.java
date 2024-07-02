@@ -17,7 +17,9 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -50,6 +52,14 @@ public class myWebApp implements EntryPoint {
 		Button rButton = new Button("Run the written code");
 		rButton.setStyleName("my-button", true);
 		RootPanel.get().add(rButton);
+
+		Button loadButton = new Button("Load");
+		loadButton.setStyleName("my-button", true);
+		RootPanel.get().add(loadButton);
+
+		Button saveButton = new Button("Save");
+		saveButton.setStyleName("my-button", true);
+		RootPanel.get().add(saveButton);
 
 		VerticalPanel vp1 = new VerticalPanel();
 		VerticalPanel vp2 = new VerticalPanel();
@@ -120,8 +130,47 @@ public class myWebApp implements EntryPoint {
 			public void onClick(ClickEvent event) {
 				String program = ta.getText();
 				Keyboard.reset();
+				tp.selectTab(0);
 				tryToStart(program);
-				//createDialog();
+			}
+		});
+
+		loadButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				String key = "program1";
+				Storage storage = Storage.getLocalStorageIfSupported();
+				if (storage == null) {
+					return;
+				}
+				String program = storage.getItem(key);
+				if (program == null || program.trim().isEmpty()) {
+					Window.alert("Can't find any saved data.\nPlease consider to backup your program to the Notes from time to time");
+					return;
+				}
+				String current = ta.getText();
+				if (!current.trim().isEmpty() && !Window.confirm("Replace the current program?")) {
+					return;
+				}
+				ta.setText(program);
+			}
+		});
+
+		saveButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				String program = ta.getText();
+				String key = "program1";
+				Storage storage = Storage.getLocalStorageIfSupported();
+				if (storage == null) {
+					Window.alert("Pardon, but 'save' is not supported in this browser");
+					return;
+				}
+				if (program.trim().isEmpty()) {
+					Window.alert("Could you please input some text");
+					return;
+				}
+				storage.setItem(key, program);
 			}
 		});
 
