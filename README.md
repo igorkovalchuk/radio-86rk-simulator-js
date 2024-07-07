@@ -9,6 +9,10 @@ Radio 86RK retrocomputer simulator (BASIC operators using JavaScript, pseudo-gra
 
 Just for fun ...
 
+Можна просто скопіювати файли на смартфон і запускати, наприклад, за допомогою Opera.
+
+Працює навіть з Firefox для Windows XP.
+
 ===================
 
 https://igorkovalchuk.github.io/
