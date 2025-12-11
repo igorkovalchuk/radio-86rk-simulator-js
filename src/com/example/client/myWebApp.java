@@ -19,6 +19,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -71,6 +72,7 @@ public class myWebApp implements EntryPoint {
 	    RootPanel.get().add(tp);
 		
 	    final TextArea ta = new TextArea();
+	    ta.setName("simulatorCode");
 	    ta.setCharacterWidth(80);
 	    ta.setVisibleLines(50);
 	    vp2.add(ta);
@@ -206,22 +208,21 @@ public class myWebApp implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		canvas.addKeyUpHandler(handler);
 
-		//final Timer timer = new Timer() {
-			//@Override
-			//public void run() {
-				// updateClock(JsDate.create());
-			//}
-		//};
-		//timer.scheduleRepeating(REFRESH_RATE);
+		final Timer timer = new Timer() {
+			@Override
+			public void run() {
+				simulatorInitialize();
+			}
+		};
+		timer.schedule(1500);
 
 	}
-
-	//private void updateClock(JsDate date) {
-		//context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-	//}
 
 	public static native void tryToStart(Object obj) /*-{
 	  $wnd.tryToStart(obj);
 	}-*/;
 
+	public static native void simulatorInitialize() /*-{
+	  $wnd.simulatorInitialize();
+	}-*/;
 }

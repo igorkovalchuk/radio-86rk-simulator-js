@@ -192,6 +192,63 @@
 	function stop() {
 		throw 'STOP!';
 	}
+
+        function getParameters() {
+                var result = {};
+                const url = window.location.search;
+                const query = url.split('?')[1];
+                if (query) {
+                        const pairs = query.split('&');
+                        for (var i = 0; i < pairs.length; i++) {
+                            const pair = pairs[i].split('=');
+                            result[pair[0]] = pair[1];
+                        }
+                }
+                return result;
+        }
+
+        async function fetchData(url, callback) {
+                const xhr = new XMLHttpRequest();
+
+                xhr.onreadystatechange = () => {
+                  if (xhr.readyState === XMLHttpRequest.DONE) {
+                    const status = xhr.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        callback(xhr.responseText);
+                    } else {
+                      alert("Can't fetch from " + url);
+                    }
+                  }
+                };
+
+                xhr.open("GET", url, true);
+                xhr.send();
+        }
+
+        // https://example.com/myWebApp.html?url=https://example.com/program.js&run=1&reps=3&delay=1.5
+        async function autostart(code, params) {
+                document.getElementsByName('simulatorCode')[0].value = code;
+                if (params['run']) {
+                        const repetitions = params['reps'] ? params['reps'] : 1;
+                        const delay = params['delay'] ? parseFloat(params['delay']) : undefined;
+                        for (var i = 1; i <= repetitions; i++) {
+                                await tryToStart(code);
+                                if (delay) {
+                                        await pause(delay);
+                                }
+                        }
+                } else {
+                        // TODO: open the code editor
+                }
+        }
+
+        async function simulatorInitialize() {
+                const params = getParameters();
+                if (params['url']) {
+                        fetchData(params['url'], (code) => autostart(code, params));
+                }
+        }
+
 </script>
 
 </head>
@@ -211,48 +268,9 @@
 			application to display correctly.</div>
 	</noscript>
 
-	<!-- 
-	<h1>Web Application Starter Project (test)</h1>
-	-->
-
-	<!-- 
-	<table align="center">
-		<tr>
-			<td colspan="2" style="font-weight: bold;">Please enter your
-				name:</td>
-		</tr>
-		<tr>
-			<td id="nameFieldContainer"></td>
-			<td id="sendButtonContainer"></td>
-		</tr>
-		<tr>
-			<td colspan="2" style="color: red;" id="errorLabelContainer"></td>
-		</tr>
-	</table>
-	-->
-
 	<div style="display: none;">
 		<img id="rk_font1" src="rk_font1.bmp" width="8" height="2048" />
 	</div>
-
-	<textarea id="sample_circles" style="display: none;">
-cls();
-
-attempts = 30;
-
-for (j = 1; j <= attempts; j++) {
-    setTimeout(createFunction(j), j * 300);
-}
-
-function createFunction(r) {
-
-    return async function() {
-          x0 = Math.random() * 150 + 5;
-          y0 = Math.random() * 50 + 5;
-          circle(x0, y0, r);
-    }
-}
-	</textarea>
 
 </body>
 </html>
