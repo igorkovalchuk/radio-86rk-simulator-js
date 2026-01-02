@@ -5,7 +5,7 @@
 -->
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.11.0//EN"
   "http://gwtproject.org/doctype/2.11.0/gwt-module.dtd">
-<module rename-to='mywebapp'>
+<module rename-to='simulator'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
 
@@ -20,14 +20,10 @@
   <!-- Other module inherits                                      -->
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='com.example.client.myWebApp'/>
+  <entry-point class='com.example.client.Simulator'/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
-
-  <!--
-  <source path='shared'/>
-  -->
 
   <!-- allow Super Dev Mode -->
   <add-linker name="xsiframe"/>

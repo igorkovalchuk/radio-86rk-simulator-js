@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="myWebApp" default="build" basedir=".">
+<project name="Simulator" default="build" basedir=".">
   <!-- Arguments to gwtc and devmode targets -->
   <property name="gwt.args" value="" />
 
@@ -27,7 +27,7 @@
     <mkdir dir="war/WEB-INF/classes"/>
     <javac srcdir="src" includes="**" encoding="utf-8"
         destdir="war/WEB-INF/classes"
-        source="1.7" target="1.7" nowarn="true"
+        source="1.8" target="1.8" nowarn="true"
         debug="true" debuglevel="lines,vars,source">
       <classpath refid="project.class.path"/>
     </javac>
@@ -47,7 +47,7 @@
       <arg value="war"/>
       <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
       <arg line="${gwt.args}"/>
-      <arg value="com.example.myWebApp"/>
+      <arg value="com.example.Simulator"/>
     </java>
   </target>
 
@@ -60,13 +60,13 @@
       </classpath>
       <arg value="-generateJsInteropExports"/>
       <arg value="-startupUrl"/>
-      <arg value="myWebApp.html"/>
+      <arg value="Simulator.html"/>
       <arg line="-war"/>
       <arg value="war"/>
       <!-- Additional arguments like -style PRETTY, -logLevel DEBUG or -nosuperDevMode -->
       <arg line="${gwt.args}"/>
-      <arg value="com.example.myWebApp"/>
-      <arg value="com.example.myWebApp"/>
+      <arg value="com.example.Simulator"/>
+      <arg value="com.example.Simulator"/>
     </java>
   </target>
 
@@ -138,12 +138,12 @@ Test targets suppressed because -junit argument was not specified when running w
   <target name="build" depends="gwtc" description="Build this project" />
 
   <target name="war" depends="build" description="Create a war file">
-    <zip destfile="myWebApp.war" basedir="war"/>
+    <zip destfile="Simulator.war" basedir="war"/>
   </target>
 
   <target name="clean" description="Cleans this project">
     <delete dir="war/WEB-INF/classes" failonerror="false" />
-    <delete dir="war/mywebapp" failonerror="false" />
+    <delete dir="war/simulator" failonerror="false" />
   </target>
 
 </project>

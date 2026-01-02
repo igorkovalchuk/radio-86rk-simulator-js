@@ -4,7 +4,6 @@ import java.util.Arrays;
 //import radio86java.file.FileUtils;
 //import radio86java.file.SimpleFileInterface;
 
-import com.example.client.myWebApp;
 import com.google.gwt.core.client.GWT;
 
 import jsinterop.annotations.JsPackage;

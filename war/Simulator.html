@@ -11,13 +11,13 @@
 <!--                                           -->
 <!-- Any title is fine                         -->
 <!--                                           -->
-<title>Web Application Starter Project</title>
+<title>Folk Art Simulator</title>
 
 <!--                                                               -->
 <!-- Consider inlining CSS to reduce the number of requested files -->
 <!--                                                               -->
 
-<link type="text/css" rel="stylesheet" href="myWebApp.css">
+<link type="text/css" rel="stylesheet" href="Simulator.css">
 
 <!--                                           -->
 <!-- This script loads your compiled module.   -->
@@ -25,7 +25,7 @@
 <!-- be added before this line.                -->
 <!--                                           -->
 <script type="text/javascript" language="javascript"
-	src="mywebapp/mywebapp.nocache.js"></script>
+	src="simulator/simulator.nocache.js"></script>
 
 <script type="text/javascript">
 
@@ -225,7 +225,7 @@
                 xhr.send();
         }
 
-        // https://example.com/myWebApp.html?url=https://example.com/program.js&run=1&reps=3&delay=1.5
+        // https://example.com/simulator.html?url=https://example.com/program.js&run=1&reps=3&delay=1.5
         async function autostart(code, params) {
                 document.getElementsByName('simulatorCode')[0].value = code;
                 if (params['run']) {
@@ -269,7 +269,7 @@
 	</noscript>
 
 	<div style="display: none;">
-		<img id="rk_font1" src="rk_font1.bmp" width="8" height="2048" />
+		<img id="font_ua" src="font_ua.bmp" width="8" height="2048" />
 	</div>
 
 </body>

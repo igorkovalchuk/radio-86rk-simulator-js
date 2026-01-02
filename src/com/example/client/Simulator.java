@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class myWebApp implements EntryPoint {
+public class Simulator implements EntryPoint {
 
 	/**
 	 * update canvas based on interval
@@ -102,7 +102,7 @@ public class myWebApp implements EntryPoint {
 		context = canvas.getContext2d();
 		vp1.add(canvas);
 		
-		ImageElement imageElement = ImageElement.as(DOM.getElementById("rk_font1"));
+		ImageElement imageElement = ImageElement.as(DOM.getElementById("font_ua"));
 		ComputerModelIntf computerModel = new ComputerModel(parameters);
 		UserInterfaceIntf ui = new UserInterfaceImpl(context, imageElement, computerModel);
 		Radio86rkAPI.createInstance(computerModel, ui);
