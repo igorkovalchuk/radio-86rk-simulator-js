@@ -72,11 +72,6 @@ public class TerminalModel implements TerminalModelIntf {
     point(0, lastY);
   }
 
-  // TODO ?
-  //public char[][] getScreenCopy() {
-  //  return Arrays.copyOf(screen, screen.length);
-  //}
-
   @Override
   public int getCursorX() {
     return cursorX;
@@ -122,108 +117,16 @@ public class TerminalModel implements TerminalModelIntf {
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
-  private boolean interactive = true;
-
-  @Override
-  public void setInteractive(boolean interactive) {
-    this.interactive = interactive;
-    /*
-    synchronized (keyboardQueue) {
-      keyboardQueue.clear();
-      keyboardQueueDate.clear();
-    }
-    */
-  }
-
-  @Override
-  public boolean isInteractive() {
-    return interactive;
-  }
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////
-  //private final LinkedList<KeyEvent> keyboardQueue = new LinkedList<>();
-  //private final LinkedList<Long> keyboardQueueDate = new LinkedList<>();
-
-  /*
-  @Override
-  public void key(KeyEvent e) {
-    char c = e.getKeyChar();
-    int k = e.getKeyCode();
-
-    if (interactive) {
-      if (k == KeyEvent.VK_SHIFT) {
-        // does nothing;
-      } else if (e.isActionKey()) {
-        if (k == KeyEvent.VK_UP) {
-          moveUp();
-        } else if (k == KeyEvent.VK_DOWN) {
-          lf(false);
-        } else if (k == KeyEvent.VK_RIGHT) {
-          move1(false);
-          move2(false);
-        } else if (k == KeyEvent.VK_LEFT) {
-          moveLeft(false);
-        }
-      } else {
-        print(c, false);
-      }
-    } else {
-      synchronized (keyboardQueue) {
-        keyboardQueue.add(e);
-        keyboardQueueDate.add(System.currentTimeMillis());
-        //System.out.println("Keyboard put in queue: " + e);
-      }
-    }
-
-  }
-  */
-
-  /*
-  @Override
-  public KeyEvent getLastKeyboardEvent(int timeout) {
-    KeyEvent event;
-    Long time;
-    synchronized (keyboardQueue) {
-      while (true) {
-        event = null;
-        time = null;
-        try {
-          event = keyboardQueue.pop();
-          time = keyboardQueueDate.pop();
-        } catch (java.util.NoSuchElementException ex) {
-        }
-        if (event == null) {
-          break;
-        } else {
-          if (timeout < 0) {
-            break;
-          }
-          if ((System.currentTimeMillis() - time) < timeout) {
-            break;
-          } else {
-            event = null;
-          }
-        }
-      }
-    }
-    if (event != null) {
-      //System.out.println("Keyboard returns from queue: " + event);
-    }
-    return event;
-  }
-  */
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////
   private boolean inScreen(int x, int y) {
     return ((y >= 0) && (y <= lastY) && (x >= 0) && (x <= lastX));
   }
 
   private void print(char c, boolean fixed) {
     if (c == 10) {
-      // перевод строки;
+      // line feed;
       lf(fixed);
     } else if (c == 13) {
-      // возврат каретки;
+      // carriage return;
       cr();
     } else {
       move1(fixed);
@@ -250,36 +153,6 @@ public class TerminalModel implements TerminalModelIntf {
   private void move2(boolean fixed) {
     cursorX++;
   }
-
-  /*
-  private void moveLeft(boolean fixed) {
-    cursorX--;
-    if (cursorX < 0) {
-      cursorX = lastX;
-      if (!fixed) {
-        moveUp();
-      }
-    }
-  }
-  */
-
-  /*
-  private void moveUp() {
-    if (directionUp > 0) {
-      // coordinates of (0, 0) at the bottom left corner of the screen;
-      cursorY++;
-      if (cursorY > lastY) {
-        cursorY = lastY;
-      }
-    } else {
-      // coordinates of (0, 0) at the top left corner;
-      cursorY--;
-      if (cursorY < 0) {
-        cursorY = 0;
-      }
-    }
-  }
-  */
 
   public void lf() {
     lf(false);
@@ -380,7 +253,6 @@ public class TerminalModel implements TerminalModelIntf {
   @Override
   public void plot(int x, int y, int z) {
 
-    //System.out.println("plot " + x + " " + y + " " + z);
     pointX = x;
     pointY = y;
     int x1 = x / 2;
@@ -489,18 +361,6 @@ public class TerminalModel implements TerminalModelIntf {
 
     pointX = toX;
     pointY = toY;
-  }
-
-  private boolean coloredCharset = false;
-
-  @Override
-  public void setColoredCharset(boolean value) {
-    this.coloredCharset = value;
-  }
-
-  @Override
-  public boolean isColoredCharset() {
-    return this.coloredCharset;
   }
 
   public TerminalParameters getParameters() {

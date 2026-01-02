@@ -20,7 +20,7 @@ public class UserInterfaceImpl implements UserInterfaceIntf {
 
 	private final CssColor BLACK = getColor(0, 0, 0);
 	private final CssColor YELLOW = getColor(255, 255, 0);
-	//private final CssColor GRAY = getColor(127, 127, 127);
+
 	
 	/**
 	 * @param computerModel

@@ -43,10 +43,6 @@ public class Radio86rkAPI {
     ui.updateScreen();
   }
 
-  public void interactive(boolean interact) {
-    getTerminalModel().setInteractive(interact);
-  }
-
   public void print(Object message) {
 
     getTerminalModel().print(String.valueOf(message));
@@ -89,7 +85,6 @@ public class Radio86rkAPI {
   }
 
   public void cur(double x, double y) {
-    //System.out.println("CUR " + x + " " + y);
     getTerminalModel().point(toInt(x), toInt(y));
   }
 
@@ -98,13 +93,11 @@ public class Radio86rkAPI {
   }
 
   public void cls() {
-    //System.out.println("CLS");
     getTerminalModel().cls();
     updateScreen();
   }
 
   public void plot(double x, double y, int z) {
-    //System.out.println("PLOT " + x + " " + y + " " + z);
     getTerminalModel().plot(toInt(x), toInt(y), z);
     updateScreen();
   }
@@ -171,16 +164,6 @@ public class Radio86rkAPI {
     }
     return (int) value.toCharArray()[0];
   }
-
-  //public SimpleFileInterface localFile(String path, String fileName) {
-    //SimpleFileInterface file = FileUtils.loadLocalFile(path, fileName);
-    //return file;
-  //}
-
-  //public SimpleFileInterface remoteFile(String path) {
-    //SimpleFileInterface file = FileUtils.loadRemoteFile(path);
-    //return file;
-  //}
 
   public void log(Object message) {
     GWT.log("LOG: " + message);

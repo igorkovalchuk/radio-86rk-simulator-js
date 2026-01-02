@@ -39,10 +39,6 @@ public class Simulator implements EntryPoint {
 	 */
 	private static final int REFRESH_RATE = 1000;
 
-	private static final int CANVAS_HEIGHT = 25 * (8 * 1 + 1);
-	private static final int CANVAS_WIDTH = 64 * (8 * 1 + 1);
-
-	private Canvas canvas;
 	private Context2d context;
 
 	/**
@@ -85,7 +81,6 @@ public class Simulator implements EntryPoint {
 				+ "circle(24, 24, 20);"
 				+ "\n");
 
-		//RootPanel.get().add(new Label("HTML5 Canvas element"));
 		Canvas canvas = Canvas.createIfSupported();
 		if (canvas == null) {
 			RootPanel.get().add(new Label("Sorry, your browser doesn't support the HTML5 Canvas element"));

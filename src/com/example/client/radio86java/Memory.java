@@ -5,8 +5,6 @@ import java.util.Arrays;
 /**
  * 76D0 - 7FFF or 7FF3 screen area 
  * 77C2 (30658) - 7F51 (32593) visible screen area (25 lines * (8 + 64 + 6))
- *
- * @author lampshade1
  */
 public class Memory {
 
