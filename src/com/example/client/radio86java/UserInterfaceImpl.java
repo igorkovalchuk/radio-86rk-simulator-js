@@ -18,8 +18,8 @@ public class UserInterfaceImpl implements UserInterfaceIntf {
 
 	private boolean freeze = false;
 
-	private final CssColor BLACK = getColor(0, 0, 0);
-	private final CssColor YELLOW = getColor(255, 255, 0);
+	private final CssColor BLACK = GraphicUtil.getColor(0, 0, 0);
+	private final CssColor YELLOW = GraphicUtil.getColor(255, 255, 0);
 
 	
 	/**
@@ -124,6 +124,8 @@ public class UserInterfaceImpl implements UserInterfaceIntf {
 			}
 		}
 
+		computerModel.getOverlay().render(context);
+
 		context.restore();
 	}
 
@@ -140,10 +142,6 @@ public class UserInterfaceImpl implements UserInterfaceIntf {
 				parameters.charsetWidth, parameters.charsetHeight, 
 				screenX * parameters.deltaX, screenY * parameters.deltaY,
 				parameters.scaledCharsetWidth, parameters.scaledCharsetHeight);
-	}
-
-	private CssColor getColor(int red, int green, int blue) {
-		return CssColor.make(red, green, blue);
 	}
 
 	@Override

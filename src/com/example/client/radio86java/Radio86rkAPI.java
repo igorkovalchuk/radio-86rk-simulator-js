@@ -4,6 +4,8 @@ import java.util.Arrays;
 //import radio86java.file.FileUtils;
 //import radio86java.file.SimpleFileInterface;
 
+import com.example.client.radio86java.command.LineCommand;
+import com.example.client.radio86java.command.PlotCommand;
 import com.google.gwt.core.client.GWT;
 
 import jsinterop.annotations.JsPackage;
@@ -94,12 +96,20 @@ public class Radio86rkAPI {
 
   public void cls() {
     getTerminalModel().cls();
+    computerModel.getOverlay().cls();
     updateScreen();
   }
 
+  // block graphics "pixels", defined in ROM
   public void plot(double x, double y, int z) {
     getTerminalModel().plot(toInt(x), toInt(y), z);
     updateScreen();
+  }
+
+  // graphical square dots, with color
+  public void gplot(double x, double y, int color) {
+      computerModel.getOverlay().apply(new PlotCommand(x, y, color));
+      updateScreen();
   }
 
   // arc in degrees;
@@ -135,6 +145,13 @@ public class Radio86rkAPI {
   public void line(double x, double y) {
     getTerminalModel().line(toInt(x), toInt(y));
     updateScreen();
+  }
+
+  public void gline(double x, double y) {
+      double[] lastXY = computerModel.getOverlay().getLastXY();
+      computerModel.getOverlay().apply(new LineCommand(lastXY[0], lastXY[1], x, y, 
+              computerModel.getOverlay().getLastColor()));
+      updateScreen();
   }
 
   private int toInt(double x) {

@@ -7,8 +7,15 @@ public class ComputerModel implements ComputerModelIntf {
 
   private final TerminalModel terminalModel;
 
+  /**
+   * Additional hardware thing to draw a graphics layer, or a color mosaic,
+   * over the terminal picture
+   */
+  private final GraphicOverlay overlay;
+
   public ComputerModel(TerminalParameters parameters) {
 	  terminalModel = new TerminalModel(parameters);
+	  overlay = new GraphicOverlay(parameters);
   }
 
   @Override
@@ -16,4 +23,7 @@ public class ComputerModel implements ComputerModelIntf {
     return terminalModel;
   }
 
+  public GraphicOverlay getOverlay() {
+      return overlay;
+  }
 }

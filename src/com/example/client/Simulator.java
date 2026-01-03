@@ -73,12 +73,12 @@ public class Simulator implements EntryPoint {
 	    ta.setVisibleLines(50);
 	    vp2.add(ta);
 		ta.setText("cls();" + "\n" 
-				+ "plot(0, 0, 1);" + "\n" 
-				+ "line(49, 49);" + "\n" 
-				+ "line(49, 0);" + "\n"
-				+ "line(0, 0);" + "\n"
-				+ "\n"
-				+ "circle(24, 24, 20);"
++ "gplot(0, 0, 3);" + "\n"
++ "gline(49, 49);" + "\n"
++ "gplot(49, 49, 2);" + "\n"
++ "gline(49, 0);" + "\n"
++ "gplot(49, 0, 1);" + "\n"
++ "gline(0, 0);" + "\n"
 				+ "\n");
 
 		Canvas canvas = Canvas.createIfSupported();

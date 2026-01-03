@@ -10,4 +10,8 @@ public interface ComputerModelIntf {
    */
   TerminalModelIntf getTerminalModel();
 
+  /**
+   * @return an additional overlay
+   */
+  GraphicOverlay getOverlay();
 }
