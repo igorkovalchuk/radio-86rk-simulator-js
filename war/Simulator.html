@@ -255,6 +255,9 @@
         }
 
         async function simulatorInitialize() {
+                const canvas = document.getElementsByTagName('canvas')[0];
+                canvas.getContext("2d").imageSmoothingEnabled = false;
+
                 const params = getParameters();
                 if (params['url']) {
                         fetchData(params['url'], (code) => autostart(code, params));
