@@ -1,19 +1,10 @@
 package com.example.client.radio86java.command;
 
-import com.example.client.radio86java.GraphicUtil;
+import com.example.client.radio86java.Palette;
 import com.example.client.radio86java.TerminalParameters;
 import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.canvas.dom.client.CssColor;
 
 public class PlotCommand implements Command {
-
-    private final CssColor BLACK = GraphicUtil.getColor(0, 0, 0);
-    private final CssColor WHITE = GraphicUtil.getColor(255, 255, 255);
-    private final CssColor RED = GraphicUtil.getColor(255, 0, 0);
-    private final CssColor GREEN = GraphicUtil.getColor(0, 255, 0);
-
-    // TODO: the palette should be configurable in GraphicOverlay
-    private final CssColor[] palette = new CssColor[] {BLACK, WHITE, RED, GREEN};
 
     private final double x;
     private final double y;
@@ -53,7 +44,7 @@ public class PlotCommand implements Command {
         double w = parameters.scaledCharsetWidth / 2;
         double h = parameters.scaledCharsetHeight / 2;
 
-        context.setFillStyle(palette[color]);
+        context.setFillStyle(Palette.getInstance().getColor(color));
         context.fillRect(x1, y1 - h , w, h);
     }
 }

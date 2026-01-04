@@ -112,6 +112,16 @@ public class Radio86rkAPI {
       updateScreen();
   }
 
+  public void setPalette(String[] colors) {
+      Palette.getInstance().setPalette(colors);
+      updateScreen();
+  }
+
+  public void setColor(int index, String color) {
+      Palette.getInstance().setColor(index, color);
+      updateScreen();
+  }
+
   // arc in degrees;
   public void arcD(double x, double y, double r, double a1, double a2) {
     TerminalModelIntf c = getTerminalModel();

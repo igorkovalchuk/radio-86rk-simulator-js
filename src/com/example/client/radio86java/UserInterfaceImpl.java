@@ -1,7 +1,6 @@
 package com.example.client.radio86java;
 
 import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.ImageElement;
 
@@ -17,9 +16,6 @@ public class UserInterfaceImpl implements UserInterfaceIntf {
 	private final ImageElement charsetImage;
 
 	private boolean freeze = false;
-
-	private final CssColor BLACK = GraphicUtil.getColor(0, 0, 0);
-	private final CssColor YELLOW = GraphicUtil.getColor(255, 255, 0);
 
 	
 	/**
@@ -42,7 +38,7 @@ public class UserInterfaceImpl implements UserInterfaceIntf {
 
 	private void initialPaintComponent() {
 		context.save();
-		context.setFillStyle(BLACK);
+		context.setFillStyle(Palette.getInstance().getColor(0));
 		context.fillRect(0, 0, parameters.canvasWidth, parameters.canvasHeight);
 		context.restore();
 	}
@@ -84,7 +80,7 @@ public class UserInterfaceImpl implements UserInterfaceIntf {
 			y = y * parameters.deltaY + parameters.deltaY;
 
 			context.save();
-			context.setStrokeStyle(YELLOW);
+			context.setStrokeStyle(Palette.getInstance().getColor(1));
 			context.moveTo(x, y);
 			context.lineTo(x + parameters.deltaX, y);
 			context.restore();

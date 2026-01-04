@@ -72,12 +72,16 @@ public class Simulator implements EntryPoint {
 	    ta.setCharacterWidth(80);
 	    ta.setVisibleLines(50);
 	    vp2.add(ta);
-		ta.setText("cls();" + "\n" 
-+ "gplot(0, 0, 3);" + "\n"
+		ta.setText(
+"setPalette([\"white\", \"black\", \"#f00\", \"green\", \"blue\"]);" + "\n"
++ "setColor(3, \"#0000ff\");" + "\n"
++ "setColor(4, \"rgb(0,255,0)\");" + "\n"
++ "cls();" + "\n" 
++ "gplot(0, 0, 2);" + "\n"
 + "gline(49, 49);" + "\n"
-+ "gplot(49, 49, 2);" + "\n"
++ "gplot(49, 49, 3);" + "\n"
 + "gline(49, 0);" + "\n"
-+ "gplot(49, 0, 1);" + "\n"
++ "gplot(49, 0, 4);" + "\n"
 + "gline(0, 0);" + "\n"
 				+ "\n");
 
