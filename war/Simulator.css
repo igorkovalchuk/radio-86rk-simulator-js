@@ -30,4 +30,7 @@ h1 {
   text-align: center;
   text-decoration: none;
   font-size: 20px !important;
+  /* disable double-click zoom for mobile
+     https://gist.github.com/andrewvaughan/8f6f892bdbc7d5d973879ed909a4aa1e */
+  touch-action: manipulation;
 }
