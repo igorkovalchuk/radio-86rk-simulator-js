@@ -33,6 +33,8 @@ public class CharsetUtils {
         mapU2R.put(u2.charAt(i), 64 + i);
       }
     }
+    mapU2R.put('І', mapU2R.get('I'));
+    mapU2R.put('і', mapU2R.get('I'));
   }
 
   /**
