@@ -29,6 +29,8 @@ import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import static com.example.client.radio86java.Constants.*;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -91,7 +93,11 @@ public class Simulator implements EntryPoint {
 			return;
 		}
 
-		TerminalParameters parameters = new TerminalParameters(64, 25, 8, 8, 1, 1, 2, 2);
+		TerminalParameters parameters = new TerminalParameters(
+		        TERMINAL_WIDTH, TERMINAL_HEIGHT,
+		        CHARSET_WIDTH, CHARSET_HEIGHT,
+		        X_GAP, Y_GAP,
+		        X_MULTIPLIER, Y_MULTIPLIER);
 
 		canvas.setWidth(parameters.canvasWidth + Unit.PX.getType());
 		canvas.setCoordinateSpaceWidth(parameters.canvasWidth);

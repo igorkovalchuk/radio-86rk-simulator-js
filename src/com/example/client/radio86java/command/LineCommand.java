@@ -1,8 +1,7 @@
 package com.example.client.radio86java.command;
 
+import com.example.client.radio86java.GraphicOverlayMemory;
 import com.example.client.radio86java.GraphicUtil;
-import com.example.client.radio86java.TerminalParameters;
-import com.google.gwt.canvas.dom.client.Context2d;
 
 public class LineCommand implements Command {
 
@@ -31,8 +30,8 @@ public class LineCommand implements Command {
     }
 
     @Override
-    public void render(Context2d context, TerminalParameters parameters) {
+    public void apply(GraphicOverlayMemory memory) {
         GraphicUtil.line((int)x, (int)y, (int)toX, (int)toY, 
-                (lx, ly) -> (new PlotCommand(lx, ly, color)).render(context, parameters));
+                (lx, ly) -> (new PlotCommand(lx, ly, color)).apply(memory));
     }
 }

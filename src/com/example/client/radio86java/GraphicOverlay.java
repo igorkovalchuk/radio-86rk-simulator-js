@@ -1,31 +1,26 @@
 package com.example.client.radio86java;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.client.radio86java.command.Command;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 public class GraphicOverlay {
 
-    private TerminalParameters parameters;
+    private final GraphicOverlayMemory memory = new GraphicOverlayMemory();
 
-    // This is probably a temporary solution, 
-    // normally this should be a RAM memory-based model
-    private List<Command> commands = new ArrayList<>();
+    private final GraphicOverlayRenderer renderer;
 
     private double[] lastXY = {0, 0};
 
     private int lastColor = 0;
 
     public GraphicOverlay(TerminalParameters parameters) {
-        this.parameters = parameters;
+        this.renderer = new GraphicOverlayRenderer(parameters, memory);
     }
 
     public void apply(Command command) {
-        commands.add(command);
         lastXY = command.getLastXY();
         lastColor = command.getColor();
+        command.apply(memory);
     }
 
     public double[] getLastXY() {
@@ -37,12 +32,10 @@ public class GraphicOverlay {
     }
 
     public void render(Context2d context) {
-        for(Command command : commands) {
-            command.render(context, parameters);
-        }
+        renderer.render(context);
     }
 
     public void cls() {
-        commands.clear();
+        memory.cls();
     }
 }

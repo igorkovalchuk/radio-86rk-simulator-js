@@ -1,11 +1,10 @@
 package com.example.client.radio86java.command;
 
-import com.example.client.radio86java.TerminalParameters;
-import com.google.gwt.canvas.dom.client.Context2d;
+import com.example.client.radio86java.GraphicOverlayMemory;
 
 public interface Command {
 
-    void render(Context2d context, TerminalParameters parameters);
+    void apply(GraphicOverlayMemory memory);
 
     double[] getLastXY();
 
