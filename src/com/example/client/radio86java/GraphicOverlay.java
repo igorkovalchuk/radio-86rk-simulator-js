@@ -38,4 +38,8 @@ public class GraphicOverlay {
     public void cls() {
         memory.cls();
     }
+
+    public int[][] cloneMemory() {
+        return memory.cloneMemory();
+    }
 }

@@ -11,7 +11,7 @@
 <!--                                           -->
 <!-- Any title is fine                         -->
 <!--                                           -->
-<title>Folk Art Simulator</title>
+<title>Retro Computer Simulator</title>
 
 <!--                                                               -->
 <!-- Consider inlining CSS to reduce the number of requested files -->
@@ -254,7 +254,45 @@
                 }
         }
 
+        async function saveScreen() {
+            var begin = 30416;
+            var end = 32767;
+
+            var a = new Uint8Array(end - begin + 1);
+
+            var b = 0;
+            for(i = begin; i <= end; i++) {
+                b = peek(i);
+                a[i - begin] = b;
+            }
+
+            var blob = new Blob([a.buffer], {type: "application/octet-stream"});
+            await saveToFile("screenshot.bin", blob);
+        }
+
+        async function saveGraphicOverlay(jsonObject) {
+            const jsonString = JSON.stringify(jsonObject);
+            var blob = new Blob([jsonString], {type: "application/json"});
+            await saveToFile("overlay.json", blob);
+        }
+
+        async function saveToFile(name, blob) {
+            var hiddenElement = document.createElement('a');
+            const url = window.URL.createObjectURL(blob);
+            hiddenElement.href = url;
+            hiddenElement.target = '_blank';
+            hiddenElement.download = name;
+
+            hiddenElement.click();
+            hiddenElement.remove();
+
+            setTimeout(function() {
+                return window.URL.revokeObjectURL(url);
+            }, 1000);
+        }
+
         async function simulatorInitialize() {
+
                 const canvas = document.getElementsByTagName('canvas')[0];
                 canvas.getContext("2d").imageSmoothingEnabled = false;
 

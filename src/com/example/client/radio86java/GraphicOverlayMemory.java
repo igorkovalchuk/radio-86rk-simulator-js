@@ -30,4 +30,14 @@ public class GraphicOverlayMemory {
         }
         return memory[y][x];
     }
+
+    public int[][] cloneMemory() {
+        int[][] copy = new int[OVERLAY_HEIGHT][OVERLAY_WIDTH];
+        for(int y = 0; y < OVERLAY_HEIGHT; y ++) {
+            for(int x = 0; x < OVERLAY_WIDTH; x++) {
+                copy[y][x] = memory[y][x]; 
+            }
+        }
+        return copy;
+    }
 }

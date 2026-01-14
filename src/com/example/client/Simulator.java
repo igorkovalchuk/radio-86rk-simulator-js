@@ -3,6 +3,7 @@ package com.example.client;
 import com.example.client.radio86java.ComputerModel;
 import com.example.client.radio86java.ComputerModelIntf;
 import com.example.client.radio86java.Keyboard;
+import com.example.client.radio86java.Palette;
 import com.example.client.radio86java.Radio86rkAPI;
 import com.example.client.radio86java.TerminalParameters;
 import com.example.client.radio86java.UserInterfaceImpl;
@@ -10,6 +11,7 @@ import com.example.client.radio86java.UserInterfaceIntf;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,9 +19,12 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONNumber;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONString;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -60,12 +65,21 @@ public class Simulator implements EntryPoint {
 		saveButton.setStyleName("my-button", true);
 		RootPanel.get().add(saveButton);
 
+        Button screenButton = new Button("Screen dump");
+        screenButton.setStyleName("my-button", true);
+        RootPanel.get().add(screenButton);
+
+        Button overlayButton = new Button("Overlay");
+        overlayButton.setStyleName("my-button", true);
+        RootPanel.get().add(overlayButton);
+
 		VerticalPanel vp1 = new VerticalPanel();
 		VerticalPanel vp2 = new VerticalPanel();
-		
+
 		TabPanel tp = new TabPanel();
-	    tp.add(vp1, " ... Display ... ");
-	    tp.add(vp2, "... ... ... Code ... ... ...");
+	    tp.setStyleName("my-tab-bar-panel", true);
+	    tp.add(vp1, "Display");
+	    tp.add(vp2, "Code");
 	    tp.selectTab(0);
 	    RootPanel.get().add(tp);
 		
@@ -119,6 +133,8 @@ public class Simulator implements EntryPoint {
 				Keyboard.press(text);
 			}
 		};
+
+		RootPanel.get().setStyleName("my-root-panel", true);
 
 		RootPanel.get().add(new HTML("<br>"));
 		for(Object rowObj : Keyboard.keyboard) {
@@ -181,47 +197,75 @@ public class Simulator implements EntryPoint {
 			}
 		});
 
-		class MyHandler implements KeyUpHandler {
+        screenButton.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                saveScreen();
+            }
+        });
 
-			public void onKeyUp(KeyUpEvent event) {
-				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					Keyboard.press(Keyboard.ENTER);
-				}
-				else if(event.isUpArrow()) {
-					Keyboard.press(Keyboard.UP);
-				} 
-				else if(event.isDownArrow()) {
-					Keyboard.press(Keyboard.DOWN);
-				}
-				else if(event.isLeftArrow()) {
-					Keyboard.press(Keyboard.LEFT);
-				}
-				else if(event.isRightArrow()) {
-					Keyboard.press(Keyboard.RIGHT);
-				}
-				else {
-					int code = event.getNativeKeyCode();
-					if (code <= 127) {
-						char ch = (char)code;
-						Keyboard.press(String.valueOf(ch));
-					}
-				}
-			}
+        overlayButton.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
 
-		}
+                JSONObject jsonData = new JSONObject();
+
+                JSONArray jsonPaletteArray = new JSONArray();
+                jsonData.put("palette", jsonPaletteArray);
+
+                Palette palette = Palette.getInstance();
+                for(int i = 0; i < palette.size(); i++) {
+                    jsonPaletteArray.set(i, new JSONString(palette.getColor(i)));
+                }
+
+                JSONArray jsonYArray = new JSONArray();
+                jsonData.put("memory", jsonYArray);
+
+                int[][] memory = computerModel.getOverlay().cloneMemory();
+                JSONArray jsonXArray;
+                for(int y = 0; y < memory.length; y++) {
+                    jsonXArray = new JSONArray();
+                    jsonYArray.set(y, jsonXArray);
+                    for (int x = 0; x < memory[y].length; x++) {
+                        jsonXArray.set(x, new JSONNumber(memory[y][x]));
+                    }
+                }
+                saveGraphicOverlay(jsonData.getJavaScriptObject());
+            }
+        });
 
 		MyHandler handler = new MyHandler();
 		canvas.addKeyUpHandler(handler);
 
-		final Timer timer = new Timer() {
-			@Override
-			public void run() {
-				simulatorInitialize();
-			}
-		};
-		timer.schedule(1500);
-
+		simulatorInitialize();
 	}
+
+    class MyHandler implements KeyUpHandler {
+        public void onKeyUp(KeyUpEvent event) {
+            if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+                Keyboard.press(Keyboard.ENTER);
+            }
+            else if(event.isUpArrow()) {
+                Keyboard.press(Keyboard.UP);
+            } 
+            else if(event.isDownArrow()) {
+                Keyboard.press(Keyboard.DOWN);
+            }
+            else if(event.isLeftArrow()) {
+                Keyboard.press(Keyboard.LEFT);
+            }
+            else if(event.isRightArrow()) {
+                Keyboard.press(Keyboard.RIGHT);
+            }
+            else {
+                int code = event.getNativeKeyCode();
+                if (code <= 127) {
+                    char ch = (char)code;
+                    Keyboard.press(String.valueOf(ch));
+                }
+            }
+        }
+    }
 
 	public static native void tryToStart(Object obj) /*-{
 	  $wnd.tryToStart(obj);
@@ -230,4 +274,12 @@ public class Simulator implements EntryPoint {
 	public static native void simulatorInitialize() /*-{
 	  $wnd.simulatorInitialize();
 	}-*/;
+
+    public static native void saveScreen() /*-{
+      $wnd.saveScreen();
+    }-*/;
+
+    public static native void saveGraphicOverlay(JavaScriptObject jsonObject) /*-{
+      $wnd.saveGraphicOverlay(jsonObject);
+    }-*/;
 }

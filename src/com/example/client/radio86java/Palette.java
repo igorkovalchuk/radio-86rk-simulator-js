@@ -36,4 +36,8 @@ public class Palette {
     public String getColor(int index) {
         return (String)palette[index];
     }
+
+    public int size() {
+        return palette.length;
+    }
 }

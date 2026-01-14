@@ -23,6 +23,10 @@ h1 {
   color: red;
 }
 
+.my-root-panel {
+  touch-action: manipulation;
+}
+
 .my-button {
   border: 1px solid white !important;
   padding: 20px 35px !important;
@@ -33,4 +37,9 @@ h1 {
   /* disable double-click zoom for mobile
      https://gist.github.com/andrewvaughan/8f6f892bdbc7d5d973879ed909a4aa1e */
   touch-action: manipulation;
+}
+
+table.my-tab-bar-panel table.gwt-TabBar td.gwt-TabBarItem-wrapper div.gwt-TabBarItem div.gwt-Label {
+  margin: 10px 20px;
+  font-size: 15px;
 }
