@@ -19,7 +19,11 @@ public class Palette {
     }
 
     public void setPalette(String[] colors) {
+        if (colors.length < 1) {
+            return;
+        }
         int i = 0;
+        palette = new Object[colors.length];
         for(String color : colors) {
             palette[i] = CssColor.make(color);
             i++;
@@ -30,10 +34,16 @@ public class Palette {
      *  Example: green, #00ff00, #0f0, rgb(0,255,0)
      */
     public void setColor(int index, String color) {
+        if (index >= palette.length) {
+            return;
+        }
         palette[index] = CssColor.make(color);
     }
 
     public String getColor(int index) {
+        if (index >= palette.length) {
+            return (String)palette[0];
+        }
         return (String)palette[index];
     }
 
